@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 import os
 
@@ -25,6 +24,10 @@ def file_create(baseName, fileExt, fileType):
     fileHeader = f'# Created by Chaz Davis on {today}'
     python_shebang = f'#!/usr/bin/env python3 \n{fileHeader}'
     bash_shebang = f'#!/usr/bin/bash \n{fileHeader}'
+    rust_shebang = f'#!/usr/bin/env run-cargo-script \n{fileHeader}'
+    altHeader = f'/* Created by Chaz Davis on {today} */'
+    htmlHeader = f'<!--Created by Chaz Davis on {today}--->'
+    markdownHeader = f'[//]: # (Created by Chaz Davis on {today})'
 
     if fileType == 'python':
         with open(fileName, 'a+') as f:
@@ -38,9 +41,33 @@ def file_create(baseName, fileExt, fileType):
             os.stat(fileName)
             os.chmod(fileName, 0o751)
             return fileName
-    else:
+    if fileType == 'rust':
+        with open(fileName, 'a+') as f:
+            f.writelines(rust_shebang)
+            os.stat(fileName)
+            os.chmod(fileName, 0o751)
+            return fileName
+    if fileType == 'html':
+        with open(fileName, 'a+') as f:
+            f.writelines(htmlHeader)
+            os.stat(fileName)
+            os.chmod(fileName, 0o751)
+            return fileName
+    if fileType == 'yaml':
         with open(fileName, 'a+') as f:
             f.writelines(fileHeader)
+            os.stat(fileName)
+            os.chmod(fileName, 0o751)
+            return fileName
+    if fileType == 'markdown':
+        with open(fileName, 'a+') as f:
+            f.writelines(markdownHeader)
+            os.stat(fileName)
+            os.chmod(fileName, 0o751)
+            return fileName
+    else:
+        with open(fileName, 'a+') as f:
+            f.writelines(altHeader)
             os.stat(fileName)
             os.chmod(fileName, 0o751)
             return fileName
@@ -54,7 +81,7 @@ def return_file_ext(fileType):
     if fileType == 'bash':
         return '.sh'
     if fileType == 'rust':
-        return '.rst'
+        return '.rs'
     if fileType == 'css':
         return '.css'
     if fileType == 'html':
@@ -102,7 +129,7 @@ def separate_file_types(fileName):
     musicList = ['.mp3', '.flac', '.mpa', '.wav', '.wma', '.ogg']
     videoList = ['.avi', '.flv', '.h264', '.m4v', '.mkv', '.mpg', '.mpeg', '.mov', '.mp4', '.vob', '.wmv']
     picList = ['.ai', '.bmp', '.gif', '.ico', '.jpg', '.jpeg', '.png', '.ps', '.psd', '.svg', '.tif', '.tiff', '.cr2']
-    codeList = ['.c', '.class', '.dart', '.py', '.sh', '.rst', '.html', '.css', '.js', '.yaml', '.toml', '.vim',
+    codeList = ['.c', '.class', '.dart', '.py', '.sh', '.rs', '.html', '.css', '.js', '.yaml', '.toml', '.vim',
             '.lua']
     #seperate the baseName and ext from the file and return them to the program 
     baseExt = os.path.splitext(fileName)[-1]
@@ -164,21 +191,23 @@ def find_book_paths(fileName):
 
 # function to determine the correct destinations based on the filetype
 def find_dest_path(fileType, file):
-    
-    pythonBooks = '/home/chazdii/Documents/ComputerBooks/PythonBooks/'
-    vimBooks = '/home/chazdii/Documents/ComputerBooks/VimBooks/'
-    tmuxBooks = '/home/chazdii/Documents/ComputerBooks/TmuxBooks/'
-    linuxBooks = '/home/chazdii/Documents/ComputerBooks/LinuxBooks/'
-    itBooks = '/home/chazdii/Documents/ComputerBooks/ITBooks/'
-    rustBooks = '/home/chazdii/Documents/ComputerBooks/RustBooks/'
-    luaBooks = '/home/chazdii/Documents/ComputerBooks/LuaBooks/'
-    flutterBooks = '/home/chazdii/Documents/ComputerBooks/FlutterBooks/'
+    from os import path
+
+    Home = os.path.expandvars('$HOME')
+    pythonBooks = Home + '/Documents/ComputerBooks/PythonBooks/'
+    vimBooks = Home + '/Documents/ComputerBooks/VimBooks/'
+    tmuxBooks = Home + '/Documents/ComputerBooks/TmuxBooks/'
+    linuxBooks = Home + '/Documents/ComputerBooks/LinuxBooks/'
+    itBooks = Home + '/Documents/ComputerBooks/ITBooks/'
+    rustBooks = Home + '/Documents/ComputerBooks/RustBooks/'
+    luaBooks = Home + '/Documents/ComputerBooks/LuaBooks/'
+    flutterBooks = Home + '/Documents/ComputerBooks/FlutterBooks/'
     # directories for music, videos, books, and code 
-    musicDir = '/home/chazdii/Music'
-    videosDir = '/home/chazdii/Videos'
-    picsDir = '/home/chazdii/Pictures'
+    musicDir = Home + '/Music'
+    videosDir = Home + '/Videos'
+    picsDir = Home + '/Pictures'
     codeDir = '/home/chazdii/Code'
-    unknownDir = '/home/chazdii/OtherShit'
+    unknownDir = Home + '/OtherShit'
 
     if fileType == 1:
         bookType = find_book_paths(file)

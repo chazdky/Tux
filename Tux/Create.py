@@ -3,6 +3,7 @@ import argparse
 import os
 from Tux.TuxFunctions import file_seperator, file_create, return_file_ext, confirm_dest_path, separate_file_types, find_book_paths, move_file, open_in_editor, show_dest_file_list
 
+Home = os.path.expandvars('$HOME')
 
 class Create:
 
@@ -12,10 +13,10 @@ class Create:
         self.fileType = fileType
         self.destPath = destPath
 
-        scriptsDir = '/home/chazdii/Documents/Scripts'
+        scriptsDir = Home + '/Documents/Scripts'
         practiceScriptsDir = scriptsDir + 'PracticeScripts'
         
-        if destPath == 'here':
+        if destPath == 'cwd':
             destPath = destPath
         if destPath == 'Scripts':
             destPath = scriptsDir
