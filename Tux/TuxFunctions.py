@@ -194,20 +194,21 @@ def find_dest_path(fileType, file):
     from os import path
 
     Home = os.path.expandvars('$HOME')
-    pythonBooks = Home + '/Documents/ComputerBooks/PythonBooks/'
-    vimBooks = Home + '/Documents/ComputerBooks/VimBooks/'
-    tmuxBooks = Home + '/Documents/ComputerBooks/TmuxBooks/'
-    linuxBooks = Home + '/Documents/ComputerBooks/LinuxBooks/'
-    itBooks = Home + '/Documents/ComputerBooks/ITBooks/'
-    rustBooks = Home + '/Documents/ComputerBooks/RustBooks/'
-    luaBooks = Home + '/Documents/ComputerBooks/LuaBooks/'
-    flutterBooks = Home + '/Documents/ComputerBooks/FlutterBooks/'
+    compBookDir = os.path.join(Home, 'Documents/ComputerBooks')
+    pythonBooks = os.path.join(compBookDir, 'PythonBooks')
+    vimBooks = os.path.join(compBookDir, 'VimBooks')
+    tmuxBooks = os.path.join(compBookDir, 'TmuxBooks')
+    linuxBooks = os.path.join(compBookDir, 'LinuxBooks')
+    itBooks = os.path.join(compBookDir, 'ITBooks')
+    rustBooks = os.path.join(compBookDir, 'RustBooks')
+    luaBooks = os.path.join(compBookDir, 'LuaBooks')
+    flutterBooks = os.path.join(compBookDir, 'FlutterBooks')
     # directories for music, videos, books, and code 
-    musicDir = Home + '/Music'
-    videosDir = Home + '/Videos'
-    picsDir = Home + '/Pictures'
-    codeDir = '/home/chazdii/Code'
-    unknownDir = Home + '/OtherShit'
+    musicDir = os.path.join(Home, 'Music')
+    videosDir = os.path.join(Home, 'Videos')
+    picsDir = os.path.join(Home, 'Pictures')
+    codeDir = os.path.join(Home, 'Code')
+    unknownDir = os.path.join(Home, 'OtherShit')
 
     if fileType == 1:
         bookType = find_book_paths(file)

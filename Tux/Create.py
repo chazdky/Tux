@@ -13,8 +13,8 @@ class Create:
         self.fileType = fileType
         self.destPath = destPath
 
-        scriptsDir = Home + '/Documents/Scripts'
-        practiceScriptsDir = scriptsDir + 'PracticeScripts'
+        scriptsDir = os.path.join(Home, 'Documents/Scripts')
+        practiceScriptsDir = os.path.join(scriptsDir, 'PracticeScripts')
         
         if destPath == 'cwd':
             destPath = destPath

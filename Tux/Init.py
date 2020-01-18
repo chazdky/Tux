@@ -13,7 +13,7 @@ class Init:
        
         srcPath = os.path.join(os.getcwd(), fileName)
         baseName = os.path.splitext(fileName)[0]
-        destPath = Home + '/.local/bin'
+        destPath = os.path.join(Home, '.local/bin')
         fullDest = f'{destPath}/{baseName}'
         shutil.copy(srcPath, fullDest)
         os.chdir(destPath)
